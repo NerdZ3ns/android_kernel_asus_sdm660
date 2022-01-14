@@ -691,10 +691,34 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, address-of-packed-member)
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
 KBUILD_CFLAGS += -O3
+KBUILD_CFLAGS += $(call cc-option, -mllvm -polly) \
+		   $(call cc-option, -mllvm -polly-run-dce) \
+		   $(call cc-option, -mllvm -polly-run-inliner) \
+		   $(call cc-option, -mllvm -polly-opt-fusion=max) \
+		   $(call cc-option, -mllvm -polly-ast-use-context) \
+		   $(call cc-option, -mllvm -polly-detect-keep-going) \
+		   $(call cc-option, -mllvm -polly-vectorizer=stripmine) \
+		   $(call cc-option, -mllvm -polly-invariant-load-hoisting)
 else ifdef CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
 KBUILD_CFLAGS += -O2
+KBUILD_CFLAGS += $(call cc-option, -mllvm -polly) \
+		   $(call cc-option, -mllvm -polly-run-dce) \
+		   $(call cc-option, -mllvm -polly-run-inliner) \
+		   $(call cc-option, -mllvm -polly-opt-fusion=max) \
+		   $(call cc-option, -mllvm -polly-ast-use-context) \
+		   $(call cc-option, -mllvm -polly-detect-keep-going) \
+		   $(call cc-option, -mllvm -polly-vectorizer=stripmine) \
+		   $(call cc-option, -mllvm -polly-invariant-load-hoisting)
 else ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS += -Os
+KBUILD_CFLAGS += $(call cc-option, -mllvm -polly) \
+		   $(call cc-option, -mllvm -polly-run-dce) \
+		   $(call cc-option, -mllvm -polly-run-inliner) \
+		   $(call cc-option, -mllvm -polly-opt-fusion=max) \
+		   $(call cc-option, -mllvm -polly-ast-use-context) \
+		   $(call cc-option, -mllvm -polly-detect-keep-going) \
+		   $(call cc-option, -mllvm -polly-vectorizer=stripmine) \
+		   $(call cc-option, -mllvm -polly-invariant-load-hoisting)
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
