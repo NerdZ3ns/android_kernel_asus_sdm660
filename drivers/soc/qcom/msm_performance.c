@@ -62,6 +62,7 @@ static int set_cpu_min_freq(const char *buf, const struct kernel_param *kp)
 	const char *cp = buf;
 	struct cpu_status *i_cpu_stats;
 	struct cpufreq_policy policy;
+	const char *reset = "0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0";
 	cpumask_var_t limit_mask;
 
 	while ((cp = strpbrk(cp + 1, " :")))
@@ -71,7 +72,7 @@ static int set_cpu_min_freq(const char *buf, const struct kernel_param *kp)
 	if (!(ntokens % 2))
 		return -EINVAL;
 
-	cp = buf;
+	cp = reset;
 	cpumask_clear(limit_mask);
 	for (i = 0; i < ntokens; i += 2) {
 		if (sscanf(cp, "%u:%u", &cpu, &val) != 2)
@@ -139,6 +140,7 @@ static int set_cpu_max_freq(const char *buf, const struct kernel_param *kp)
 	const char *cp = buf;
 	struct cpu_status *i_cpu_stats;
 	struct cpufreq_policy policy;
+	const char *reset = "0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0";
 	cpumask_var_t limit_mask;
 
 	while ((cp = strpbrk(cp + 1, " :")))
@@ -148,7 +150,7 @@ static int set_cpu_max_freq(const char *buf, const struct kernel_param *kp)
 	if (!(ntokens % 2))
 		return -EINVAL;
 
-	cp = buf;
+	cp = reset;
 	cpumask_clear(limit_mask);
 	for (i = 0; i < ntokens; i += 2) {
 		if (sscanf(cp, "%u:%u", &cpu, &val) != 2)
