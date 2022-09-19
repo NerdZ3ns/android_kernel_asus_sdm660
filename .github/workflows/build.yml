@@ -3,7 +3,7 @@ name: Build Kernel Zenfone Max Pro M2
 on:
   push:
     branches:
-      - twelve-4.19
+      - caf-12.1
 jobs:
   kernel-build:
     runs-on: ubuntu-latest
