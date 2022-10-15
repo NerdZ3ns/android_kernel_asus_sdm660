@@ -56,16 +56,10 @@ DISTRO=$(cat /etc/issue)
 PROCS=$(nproc --all)
 export PROCS
 
-# Check for CI
-if [[ -n "$CI" ]]; then
-	if [[ -n "$CIRCLECI" ]]; then
-		export KBUILD_BUILD_VERSION=$CIRCLE_BUILD_NUM
-		export KBUILD_BUILD_HOST="CircleCI"
-		export CI_BRANCH=$CIRCLE_BRANCH
-	else
-		export KBUILD_BUILD_HOST="nrdprjkt"
-	fi
-fi
+# Check for KernelVer 4.19
+export KBUILD_BUILD_HOST="nrdprjkt"
+export LLVM=1
+export LLVM_IAS=1
 
 # Check kernel version
 KERVER=$(make kernelversion)
