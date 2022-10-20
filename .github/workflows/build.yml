@@ -2,7 +2,7 @@ name: Build Kernel Zenfone Max Pro M2
 on:
   push:
     branches:
-      - rebase
+      - rebase-1
 jobs:
   kernel-build:
     runs-on: ubuntu-latest
